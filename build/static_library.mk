@@ -17,7 +17,7 @@ $(LOCAL_OUT_DIR)/%.o:$(LOCAL_PATH)/%.c
 	$(HIDE) $(MKDIR) $(dir $@)
 	$(HIDE) echo "CC $<"
 	$(HIDE) $(CC) -MM -MF $(subst .o,.d,$@) -MP -MT $@ $(LOCAL_INCLUDES) $(CFLAGS) $<
-	$(HIDE) $(CC) -c $(LOCAL_INCLUDES) $< -o $@
+	$(HIDE) $(CC) -c $(LOCAL_INCLUDES) $(LOCAL_C_FLAGS) $< -o $@
 
 TARGET_LIBS += $(LOCAL_OUT_TARGET)
 
