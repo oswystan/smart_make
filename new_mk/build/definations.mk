@@ -8,10 +8,15 @@
 ## 
 #######################################################################
 
-define compile-c-file
+define compile-c-to-o
+endef
+define compile-c-to-d
 endef
 
-define compile-cpp-file
+define compile-cpp-to-o
+endef
+
+define compile-cpp-to-d
 endef
 
 define transform-o-to-static-lib
