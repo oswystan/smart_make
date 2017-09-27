@@ -36,8 +36,31 @@ $(DIR_OUT)/install/lib/$(LOCAL_INSTALL_DIR)/$(LOCAL_MODULE).so,\
 $(DIR_OUT)/install/lib/$(LOCAL_MODULE).so)
 endef
 
+define gen-install-file
+$(if $(LOCAL_INSTALL_DIR),\
+$(DIR_OUT)/install/$(LOCAL_INSTALL_DIR)/$(1),\
+$(DIR_OUT)/install/$(1))
+endef
+
 define gen-c-includes
 $(addprefix -I,$(1))
+endef
+
+define copy-one-file
+$(2): $(1)
+	$(H) echo "[ cp] $$<"
+	$(H) $(MKDIR) $$(dir $$@)
+	$(H) $(CP) $$< $$@
+endef
+
+define gen-copy-dependency
+$(foreach f,$(1),\
+	$(eval _src:=$(word 1,$(subst :, ,$(f)))) \
+	$(eval _dst:=$(word 2,$(subst :, ,$(f)))) \
+	$(eval _dst:=$(call gen-install-file,$(_dst))) \
+	$(eval $(call copy-one-file,$(LOCAL_PATH)/$(_src),$(_dst))) \
+	$(eval ALL_COPY_FILES += $(_dst)) \
+)
 endef
 
 define compile-c-to-o

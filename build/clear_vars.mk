@@ -15,4 +15,5 @@ LOCAL_OBJS             :=
 LOCAL_INSTALL_DIR      :=
 LOCAL_INSTALLED_MODULE :=
 LOCAL_C_INCLUDES       :=
+LOCAL_COPY_FILES       :=
 #######################################################################

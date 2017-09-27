@@ -30,6 +30,7 @@ CLEAR_VARS           := build/clear_vars.mk
 BUILD_STATIC_LIBRARY := build/static_lib.mk
 BUILD_SHARED_LIBRARY := build/shared_lib.mk
 BUILD_EXECUTABLE     := build/executable.mk
+BUILD_COPY_FILE      := build/copy_file.mk
 
 DIR_ROOT   := $(PWD)
 DIR_OUT    := out
@@ -37,6 +38,7 @@ DIR_OUT    := out
 ALL_EXECUTABLES :=
 ALL_STATIC_LIBS :=
 ALL_SHARED_LIBS :=
+ALL_COPY_FILES  :=
 
 GLOBAL_C_FLAGS  := -Wall -Werror -I inc
 GLOBAL_LD_FLAGS :=
@@ -52,7 +54,7 @@ include build/definations.mk
 all:
 include $(wildcard src/*/module.mk)
 
-all: $(ALL_EXECUTABLES) $(ALL_STATIC_LIBS) $(ALL_SHARED_LIBS)
+all: $(ALL_EXECUTABLES) $(ALL_STATIC_LIBS) $(ALL_SHARED_LIBS) $(ALL_COPY_FILES)
 
 clean:
 	$(H) echo "cleaning ..."
