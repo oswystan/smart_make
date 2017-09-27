@@ -1,13 +1,18 @@
-################################################################################
-# clear all local variables
-LOCAL_SRC_FILES  := 
-LOCAL_C_FLAGS    := 
-LOCAL_LD_FLAGS   :=
-LOCAL_C_INCLUDES := 
-LOCAL_MODULE     := 
-LOCAL_OUT_DIR    := 
-LOCAL_OUT_TARGET := 
-LOCAL_OBJS       := 
-LOCAL_INCLUDES   :=
-LOCAL_DEP        :=
-################################################################################
+#######################################################################
+##                     Copyright (C) 2017 wystan
+##
+##       filename: clear_vars
+##    description:
+##        created: 2017-09-26 22:39:25
+##         author: wystan
+##
+#######################################################################
+LOCAL_SRC_FILES        :=
+LOCAL_C_FLAGS          :=
+LOCAL_LD_FLAGS         :=
+LOCAL_MODULE           :=
+LOCAL_OBJS             :=
+LOCAL_INSTALL_DIR      :=
+LOCAL_INSTALLED_MODULE :=
+LOCAL_C_INCLUDES       :=
+#######################################################################
