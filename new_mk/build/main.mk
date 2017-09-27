@@ -32,7 +32,7 @@ ALL_STATIC_LIBS :=
 ALL_SHARED_LIBS :=
 
 GLOBAL_C_FLAGS  := -Wall -Werror -I inc
-GLOBAL_LD_FLAGS := -Wall -Werror -I inc
+GLOBAL_LD_FLAGS :=
 
 ifdef V
 H :=

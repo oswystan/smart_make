@@ -1,25 +1,22 @@
 /*
  **************************************************************************************
- *       Filename:  f.c
- *    Description:   source file
+ *       Filename:  c.h
+ *    Description:   header file
  *
  *        Version:  1.0
- *        Created:  2017-09-27 09:56:27
+ *        Created:  2017-09-27 15:20:36
  *
  *       Revision:  initial draft;
  **************************************************************************************
  */
 
-#include <stdio.h>
-#include <string.h>
-#include "f.h"
-#include "c.h"
+#ifndef C_H_INCLUDED
+#define C_H_INCLUDED
 
-void framework() {
-    struct common_t c;
-    memset(&c, 0x00, sizeof(c));
-    printf("enter %s, %d\n", __FUNCTION__, __LINE__);
-}
+struct common_t {
+    int a;
+    int b;
+};
 
+#endif /*C_H_INCLUDED*/
 /********************************** END **********************************************/
-

@@ -36,6 +36,10 @@ $(DIR_OUT)/install/lib/$(LOCAL_INSTALL_DIR)/$(LOCAL_MODULE).so,\
 $(DIR_OUT)/install/lib/$(LOCAL_MODULE).so)
 endef
 
+define gen-c-includes
+$(addprefix -I,$(1))
+endef
+
 define compile-c-to-o
 	$(H) echo "[ cc]" $<
 	$(H) $(CC) -c $(GLOBAL_C_FLAGS) $(LOCAL_C_FLAGS) $< -o $@
