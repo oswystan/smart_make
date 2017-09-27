@@ -9,6 +9,8 @@
 #######################################################################
 .PHONY: all install doc clean
 
+os := $(shell uname -s)
+
 CC       := gcc
 CPP      := g++
 RM       := rm -rf
@@ -17,7 +19,12 @@ CP       := cp
 AR       := ar
 BN       := basename
 MKDIR    := mkdir -p
+ifeq ($(os), Darwin)
+STRIP    := strip -u -r
+else
 STRIP    := strip
+endif
+
 
 CLEAR_VARS           := build/clear_vars.mk
 BUILD_STATIC_LIBRARY := build/static_lib.mk
