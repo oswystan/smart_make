@@ -2,27 +2,25 @@
 ##                     Copyright (C) 2017 wystan
 ##
 ##       filename: executable
-##    description: 
+##    description:
 ##        created: 2017-09-26 22:44:48
 ##         author: wystan
-## 
+##
 #######################################################################
 
-LOCAL_OBJS := $(LOCAL_SRC_FILES:.c=.o)
-#LOCAL_OBJS := $(LOCAL_OBJS:.cpp=.o)
-LOCAL_OBJS := $(addprefix $(DIR_OUT)/objs/$(LOCAL_PATH)/,$(LOCAL_OBJS))
+LOCAL_OBJS := $(call gen-objs-from-src,$(LOCAL_SRC_FILES))
+LOCAL_OUT_MODULE := $(DIR_OUT)/objs/$(LOCAL_PATH)/$(LOCAL_MODULE)
+LOCAL_INSTALLED_MODULE := $(gen-installed-executable)
 
-LOCAL_OUT_MODULE := $(DIR_OUT)/bin/$(LOCAL_MODULE)
+$(LOCAL_INSTALLED_MODULE):$(LOCAL_OUT_MODULE)
+	$(transform-to-stripped)
 
 $(LOCAL_OUT_MODULE): LOCAL_LD_FLAGS := $(LOCAL_LD_FLAGS)
 $(LOCAL_OUT_MODULE): $(LOCAL_OBJS)
 	$(transform-o-to-executable)
+-include $(LOCAL_OBJS:.o=.d)
 
-$(DIR_OUT)/objs/$(LOCAL_PATH)/%.o: LOCAL_C_FLAGS := $(LOCAL_C_FLAGS)
-$(DIR_OUT)/objs/$(LOCAL_PATH)/%.o: $(LOCAL_PATH)/%.c
-	$(compile-c-to-d)
-	$(compile-c-to-o)
-
-ALL_EXECUTABLES += $(LOCAL_OUT_MODULE)
+include build/binary.mk
+ALL_EXECUTABLES += $(LOCAL_INSTALLED_MODULE)
 
 #######################################################################

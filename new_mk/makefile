@@ -2,12 +2,11 @@
 ##                     Copyright (C) 2017 wystan
 ##
 ##       filename: makefile
-##    description: 
+##    description:
 ##        created: 2017-09-23 11:26:26
 ##         author: wystan
-## 
+##   *DO NOT MODIFY THIS FILE*
+##
 #######################################################################
-
 include build/main.mk
-
 #######################################################################
