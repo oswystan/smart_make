@@ -46,6 +46,10 @@ $(eval LOCAL_TMP_VAR := $(LOCAL_TMP_VAR:.cpp=.o)) \
 $(addprefix $(DIR_OUT)/objs/$(LOCAL_PATH)/,$(LOCAL_TMP_VAR))
 endef
 
+define all-subdir-makefiles-under
+$(wildcard $(1)/*/module.mk)
+endef
+
 ##########################################
 ## add path and so to LOCAL_SHARED_LIBS
 ##########################################
