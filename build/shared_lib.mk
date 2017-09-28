@@ -26,5 +26,4 @@ $(LOCAL_OUT_MODULE): $(LOCAL_OBJS)
 include build/binary.mk
 ALL_SHARED_LIBS += $(LOCAL_INSTALLED_MODULE)
 
-
 #######################################################################
