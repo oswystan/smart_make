@@ -10,7 +10,7 @@
 .PHONY: all install doc clean
 all:
 
-H     := $(if $V,,@)
+H     := $(if $(filter 1,$V),,@)
 os    := $(shell uname -s)
 CC    := gcc
 CPP   := g++
