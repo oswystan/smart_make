@@ -22,6 +22,21 @@ $(strip \
  )
 endef
 
+define mk-one-dir
+$(1):
+	@echo "[mkdir]" $$@
+	@mkdir -p $$@
+endef
+
+#####################################################
+## $(eval $(call mk-dirs,a b c d))
+#####################################################
+define mk-dirs
+$(foreach d,$(1),\
+	$(eval $(call mk-one-dir,$(d)))	\
+)
+endef
+
 ##########################################
 ## substr .cpp or .c by .o
 ##########################################
@@ -70,7 +85,7 @@ endef
 ##########################################
 define copy-one-file
 $(2): $(1)
-	$(H) echo "[ cp] $$<"
+	$(H) echo "[ copy] $$<"
 	$(H) $(MKDIR) $$(dir $$@)
 	$(H) $(CP) $$< $$@
 endef
@@ -92,7 +107,7 @@ endef
 ## compile *.c to *.o
 ##########################################
 define compile-c-to-o
-	$(H) echo "[ cc]" $<
+	$(H) echo "[   cc]" $<
 	$(H) $(CC) -c $(GLOBAL_C_FLAGS) $(LOCAL_C_FLAGS) $< -o $@
 endef
 
@@ -108,7 +123,7 @@ endef
 ## compile *.cpp to *.o
 ##########################################
 define compile-cpp-to-o
-	$(H) echo "[cpp]" $<
+	$(H) echo "[  cpp]" $<
 	$(H) $(CPP) -c $(GLOBAL_C_FLAGS) $(LOCAL_C_FLAGS) $< -o $@
 endef
 
@@ -124,7 +139,7 @@ endef
 ## ar all *.o to .a
 ##########################################
 define transform-o-to-static-lib
-	$(H) echo "[gen]" $@
+	$(H) echo "[  gen]" $@
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(RM) $@
 	$(H) $(AR) -r $@ $^ 2>/dev/null
@@ -134,7 +149,7 @@ endef
 ## link *.o to so
 ##########################################
 define transform-o-to-shared-lib
-	$(H) echo "[gen]" $@
+	$(H) echo "[  gen]" $@
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(CPP) $(GLOBAL_LD_FLAGS) $(LOCAL_LD_FLAGS) -shared $^ -o $@
 endef
@@ -143,7 +158,7 @@ endef
 ## link *.o to executable
 ##########################################
 define transform-o-to-executable
-	$(H) echo "[gen]" $@
+	$(H) echo "[  gen]" $@
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(CC) $(GLOBAL_LD_FLAGS) $(LOCAL_LD_FLAGS) $^ -o $@
 endef
@@ -152,7 +167,7 @@ endef
 ## strip executable and shared lib
 ##########################################
 define transform-to-stripped
-	$(H) echo "[ins] $@"
+	$(H) echo "[  ins] $@"
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(STRIP) $< -o $@
 endef
