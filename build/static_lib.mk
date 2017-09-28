@@ -18,6 +18,6 @@ $(LOCAL_OUT_MODULE): $(LOCAL_OBJS)
 -include $(LOCAL_OBJS:.o=.d)
 
 include build/binary.mk
-ALL_EXECUTABLES += $(LOCAL_OUT_MODULE)
+ALL_STATIC_LIBS += $(LOCAL_OUT_MODULE)
 
 #######################################################################
