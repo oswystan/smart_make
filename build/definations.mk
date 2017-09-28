@@ -47,6 +47,13 @@ $(addprefix $(DIR_OUT)/objs/$(LOCAL_PATH)/,$(LOCAL_TMP_VAR))
 endef
 
 ##########################################
+## add path and so to LOCAL_SHARED_LIBS
+##########################################
+define gen-objs-from-shared-lib
+$(addprefix $(DIR_OUT)/install/lib/,$(addsuffix .so,$(LOCAL_SHARED_LIBS)))
+endef
+
+##########################################
 ## return path for executable file
 ##########################################
 define gen-installed-executable

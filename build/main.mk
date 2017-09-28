@@ -35,16 +35,14 @@ ALL_EXECUTABLES :=
 ALL_STATIC_LIBS :=
 ALL_SHARED_LIBS :=
 ALL_COPY_FILES  :=
-ALL_PREDEF_DIRS := $(DIR_OUT)/install/lib
 
 GLOBAL_C_FLAGS  := -Wall -Werror -I inc
-GLOBAL_LD_FLAGS := -L$(DIR_OUT)/install/lib
+GLOBAL_LD_FLAGS :=
 
 include build/definations.mk
 include $(wildcard src/*/module.mk)
 
-$(eval $(call mk-dirs,$(ALL_PREDEF_DIRS)))
-all: $(ALL_PREDEF_DIRS) $(ALL_EXECUTABLES) $(ALL_STATIC_LIBS) $(ALL_SHARED_LIBS) $(ALL_COPY_FILES)
+all: $(ALL_EXECUTABLES) $(ALL_STATIC_LIBS) $(ALL_SHARED_LIBS) $(ALL_COPY_FILES)
 
 clean:
 	$(H) echo "cleaning ..."

@@ -18,7 +18,7 @@ $(LOCAL_INSTALLED_MODULE):$(LOCAL_OUT_MODULE)
 	$(transform-to-stripped)
 
 $(LOCAL_OUT_MODULE): LOCAL_LD_FLAGS := $(LOCAL_LD_FLAGS)
-$(LOCAL_OUT_MODULE): $(LOCAL_OBJS)
+$(LOCAL_OUT_MODULE): $(LOCAL_OBJS) $(call gen-objs-from-shared-lib)
 	$(transform-o-to-shared-lib)
 
 -include $(LOCAL_OBJS:.o=.d)
