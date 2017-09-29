@@ -39,6 +39,7 @@ ALL_COPY_FILES  :=
 GLOBAL_C_FLAGS  := -Wall -Werror -I inc
 GLOBAL_LD_FLAGS :=
 
+include build/help.mk
 include build/definations.mk
 include $(wildcard src/*/module.mk)
 
