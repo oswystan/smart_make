@@ -37,7 +37,7 @@ define mk-pkg-with-version
 		echo "[mkpkg]" $$pkg_name && \
 		cd $(DIR_OUT) && \
 		$(RM) $$pkg_name && \
-		$(MKPKG) $$pkg_name install > /dev/null && \
+		$(MKPKG) $$pkg_name install && \
 		cd $(DIR_ROUT)
 endef
 

@@ -19,7 +19,7 @@ CP    := cp
 AR    := ar
 BN    := basename
 MKDIR := mkdir -p
-MKPKG := tar jcvf
+MKPKG := tar jcf
 STRIP := $(if $(filter Darwin,$(shell uname -s)),strip -u -r,strip)
 
 DIR_ROOT   := $(PWD)
