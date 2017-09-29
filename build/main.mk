@@ -11,7 +11,6 @@
 all:
 
 H     := $(if $(filter 1,$V),,@)
-os    := $(shell uname -s)
 CC    := gcc
 CPP   := g++
 RM    := rm -rf
@@ -20,7 +19,7 @@ CP    := cp
 AR    := ar
 BN    := basename
 MKDIR := mkdir -p
-STRIP := $(if $(filter Darwin,$(os)),strip -u -r,strip)
+STRIP := $(if $(filter Darwin,$(shell uname -s)),strip -u -r,strip)
 
 DIR_ROOT   := $(PWD)
 DIR_OUT    := out
