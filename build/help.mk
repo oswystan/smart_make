@@ -14,7 +14,7 @@ help:
 	@echo "SUB-COMMANDS:"
 	@echo "==========================================================="
 	@echo "    help         - show this."
-	@echo "    all          - compile all source code and install them."
+	@echo "    all          - compile all source code [as default]."
 	@echo "    pkg          - make a xxx.tar.bz2 package for installation."
 	@echo "    clean        - rm -rf out/"
 	@echo "==========================================================="
