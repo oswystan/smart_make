@@ -22,6 +22,24 @@ $(strip \
  )
 endef
 
+#####################################################
+## get git version like: master-xxxx
+#####################################################
+define git-branch-version
+$(shell git branch|grep '*'|cut -d' ' -f2)-$(shell git rev-parse --short HEAD)
+endef
+
+#####################################################
+## make xxxx.tar.bz2 for install package
+#####################################################
+define mk-pkg-with-version
+	$(H) echo "[mkpkg]" $(VERSION).tar.bz2
+	$(H) { cd $(DIR_OUT) && \
+			$(RM) $(VERSION).tar.bz2 && \
+			$(MKPKG) $(VERSION).tar.bz2 install >/dev/null && \
+			cd $(DIR_ROOT);}
+endef
+
 define mk-one-dir
 $(1):
 	@echo "[mkdir]" $$@

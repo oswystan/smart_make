@@ -7,7 +7,7 @@
 ##         author: wystan
 ##
 #######################################################################
-.PHONY: all install doc clean
+.PHONY: all install doc clean pkg
 all:
 
 H     := $(if $(filter 1,$V),,@)
@@ -19,6 +19,7 @@ CP    := cp
 AR    := ar
 BN    := basename
 MKDIR := mkdir -p
+MKPKG := tar jcvf
 STRIP := $(if $(filter Darwin,$(shell uname -s)),strip -u -r,strip)
 
 DIR_ROOT   := $(PWD)
@@ -42,6 +43,10 @@ include build/definations.mk
 include $(wildcard src/*/module.mk)
 
 all: $(ALL_EXECUTABLES) $(ALL_STATIC_LIBS) $(ALL_SHARED_LIBS) $(ALL_COPY_FILES)
+
+pkg: VERSION:=$(call git-branch-version)
+pkg: all
+	$(mk-pkg-with-version)
 
 clean:
 	$(H) echo "cleaning ..."
