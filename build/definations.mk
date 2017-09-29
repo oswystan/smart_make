@@ -33,11 +33,12 @@ endef
 ## make xxxx.tar.bz2 for install package
 #####################################################
 define mk-pkg-with-version
-	$(H) echo "[mkpkg]" $(VERSION).tar.bz2
-	$(H) { cd $(DIR_OUT) && \
-			$(RM) $(VERSION).tar.bz2 && \
-			$(MKPKG) $(VERSION).tar.bz2 install >/dev/null && \
-			cd $(DIR_ROOT);}
+	$(H) pkg_name=$(call git-branch-version).tar.bz2 && \
+		echo "[mkpkg]" $$pkg_name && \
+		cd $(DIR_OUT) && \
+		$(RM) $$pkg_name && \
+		$(MKPKG) $$pkg_name install && \
+		cd $(DIR_ROUT)
 endef
 
 define mk-one-dir

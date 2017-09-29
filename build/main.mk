@@ -44,7 +44,6 @@ include $(wildcard src/*/module.mk)
 
 all: $(ALL_EXECUTABLES) $(ALL_STATIC_LIBS) $(ALL_SHARED_LIBS) $(ALL_COPY_FILES)
 
-pkg: VERSION:=$(call git-branch-version)
 pkg: all
 	$(mk-pkg-with-version)
 
