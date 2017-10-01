@@ -8,6 +8,33 @@
 ##
 #######################################################################
 
+H     := $(if $(filter 1,$V),,@)
+CC    := gcc
+CPP   := g++
+RM    := rm -rf
+CP    := cp
+AR    := ar
+MKDIR := mkdir -p
+MKPKG := tar jcf
+STRIP := $(if $(filter Darwin,$(shell uname -s)),strip -u -r,strip)
+
+DIR_ROOT   := $(PWD)
+DIR_OUT    := out
+
+CLEAR_VARS           := build/clear_vars.mk
+BUILD_STATIC_LIBRARY := build/static_lib.mk
+BUILD_SHARED_LIBRARY := build/shared_lib.mk
+BUILD_EXECUTABLE     := build/executable.mk
+BUILD_COPY_FILE      := build/copy_file.mk
+
+ALL_EXECUTABLES :=
+ALL_STATIC_LIBS :=
+ALL_SHARED_LIBS :=
+ALL_COPY_FILES  :=
+
+GLOBAL_C_FLAGS  := -Wall -Werror -I inc
+GLOBAL_LD_FLAGS :=
+
 ##########################################
 ## porting from android to get current dir
 ##########################################
