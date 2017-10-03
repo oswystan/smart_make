@@ -8,7 +8,6 @@
 ##
 #######################################################################
 
-H     := $(if $(filter 1,$V),,@)
 CC    := gcc
 CPP   := g++
 RM    := rm -rf
@@ -17,9 +16,7 @@ AR    := ar
 MKDIR := mkdir -p
 MKPKG := tar jcf
 STRIP := $(if $(filter Darwin,$(shell uname -s)),strip -u -r,strip)
-
-DIR_ROOT   := $(PWD)
-DIR_OUT    := out
+H     := $(if $(filter 1,$V),,@)
 
 CLEAR_VARS           := build/clear_vars.mk
 BUILD_STATIC_LIBRARY := build/static_lib.mk
@@ -27,13 +24,15 @@ BUILD_SHARED_LIBRARY := build/shared_lib.mk
 BUILD_EXECUTABLE     := build/executable.mk
 BUILD_COPY_FILE      := build/copy_file.mk
 
+DIR_ROOT        := $(PWD)
+DIR_OUT         := out
+GLOBAL_C_FLAGS  := -Wall -Werror -I inc
+GLOBAL_LD_FLAGS :=
+
 ALL_EXECUTABLES :=
 ALL_STATIC_LIBS :=
 ALL_SHARED_LIBS :=
 ALL_COPY_FILES  :=
-
-GLOBAL_C_FLAGS  := -Wall -Werror -I inc
-GLOBAL_LD_FLAGS :=
 
 ##########################################
 ## porting from android to get current dir
@@ -142,9 +141,9 @@ endef
 ##########################################
 define copy-one-file
 $(2): $(1)
-	$(H) echo "[ copy] $$<"
 	$(H) $(MKDIR) $$(dir $$@)
 	$(H) $(CP) $$< $$@
+	$(H) echo "[ copy] $$<"
 endef
 
 ##########################################
@@ -164,8 +163,8 @@ endef
 ## compile *.c to *.o
 ##########################################
 define compile-c-to-o
-	$(H) echo "[   cc]" $<
 	$(H) $(CC) -c $(GLOBAL_C_FLAGS) $(LOCAL_C_FLAGS) $< -o $@
+	$(H) echo "[   cc]" $<
 endef
 
 ##########################################
@@ -180,8 +179,8 @@ endef
 ## compile *.cpp to *.o
 ##########################################
 define compile-cpp-to-o
-	$(H) echo "[  cpp]" $<
 	$(H) $(CPP) -c $(GLOBAL_C_FLAGS) $(LOCAL_C_FLAGS) $< -o $@
+	$(H) echo "[  cpp]" $<
 endef
 
 ##########################################
@@ -196,37 +195,37 @@ endef
 ## ar all *.o to .a
 ##########################################
 define transform-o-to-static-lib
-	$(H) echo "[  gen]" $@
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(RM) $@
 	$(H) $(AR) -r $@ $^ 2>/dev/null
+	$(H) echo "[  gen]" $@
 endef
 
 ##########################################
 ## link *.o to so
 ##########################################
 define transform-o-to-shared-lib
-	$(H) echo "[  gen]" $@
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(CPP) $(GLOBAL_LD_FLAGS) $(LOCAL_LD_FLAGS) -shared $^ -o $@
+	$(H) echo "[  gen]" $@
 endef
 
 ##########################################
 ## link *.o to executable
 ##########################################
 define transform-o-to-executable
-	$(H) echo "[  gen]" $@
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(CC) $(GLOBAL_LD_FLAGS) $(LOCAL_LD_FLAGS) $^ -o $@
+	$(H) echo "[  gen]" $@
 endef
 
 ##########################################
 ## strip executable and shared lib
 ##########################################
 define transform-to-stripped
-	$(H) echo "[  ins] $@"
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(STRIP) $< -o $@
+	$(H) echo "[  ins] $@"
 endef
 
 #######################################################################

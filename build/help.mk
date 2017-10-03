@@ -16,7 +16,7 @@ help:
 	@echo "    help         - show this."
 	@echo "    all          - compile all source code [as default]."
 	@echo "    pkg          - make a xxx.tar.bz2 package for installation."
-	@echo "    clean        - rm -rf out/"
+	@echo "    clean        - equal to \"rm -rf out/\""
 	@echo "==========================================================="
 	@echo 
 
