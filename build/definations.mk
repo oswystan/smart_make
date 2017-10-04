@@ -26,7 +26,7 @@ BUILD_COPY_FILE      := build/copy_file.mk
 
 DIR_ROOT        := $(PWD)
 DIR_OUT         := out
-GLOBAL_C_FLAGS  := -Wall -Werror -I inc
+GLOBAL_C_FLAGS  := -Wall -Werror -g -I inc
 GLOBAL_LD_FLAGS :=
 
 ALL_EXECUTABLES :=
