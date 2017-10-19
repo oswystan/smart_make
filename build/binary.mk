@@ -15,5 +15,7 @@ $(DIR_OUT)/objs/$(LOCAL_PATH)/%.o: $(LOCAL_PATH)/%.c
 $(DIR_OUT)/objs/$(LOCAL_PATH)/%.o: $(LOCAL_PATH)/%.cpp
 	$(compile-cpp-to-d)
 	$(compile-cpp-to-o)
+$(LOCAL_PATH)/%.pb.cpp: $(LOCAL_PATH)/%.proto
+	$(compile-proto-to-cpp)
 
 #######################################################################

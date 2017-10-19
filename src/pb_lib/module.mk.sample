@@ -1,0 +1,12 @@
+###############################################################################
+
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+
+LOCAL_C_INCLUDES := /home/winner/bin/include
+LOCAL_SRC_FILES := client_packet_acc.proto
+LOCAL_MODULE := libtalpb
+
+include $(BUILD_STATIC_LIBRARY)
+
+###############################################################################

@@ -1,0 +1,47 @@
+//==========================================================================
+/**
+ * @file        : client_packet_acc.h
+ *
+ * @description :
+ *
+ * $tag         :
+ *
+ * @author      : cc
+ */
+//==========================================================================
+
+syntax="proto3";
+package ClientLbsAccPacket;
+
+
+message ConnetLbs_C2S
+{
+    repeated int32 vec_server_ip        = 1;
+    int32 is_manual_set                 = 2;
+    int32 isp_idx                       = 3;
+    int64 location_code                 = 4;
+}
+
+message ServerInfo
+{
+    int32 ip                            = 1;
+    repeated int32 port                 = 2;
+}
+
+message ConnetLbs_S2C
+{
+    int32 rsp_code                      = 1;
+    repeated ServerInfo server_info     = 2;
+}
+
+message LbsGetAcclist_C2S
+{
+    int32 ip                            = 1;
+}
+
+message LbsGetAcclist_S2C
+{
+    int32 rsp_code                      = 1;
+    repeated ServerInfo server_info     = 2;
+}
+

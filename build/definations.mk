@@ -8,15 +8,17 @@
 ##
 #######################################################################
 
-CC    := gcc
-CPP   := g++
-RM    := rm -rf
-CP    := cp
-AR    := ar
-MKDIR := mkdir -p
-MKPKG := tar jcf
-STRIP := $(if $(filter Darwin,$(shell uname -s)),strip -u -r,strip)
-H     := $(if $(filter 1,$V),,@)
+CC     := gcc
+CPP    := g++
+PROTOC := protoc
+RM     := rm -rf
+CP     := cp
+AR     := ar
+MV     := mv
+MKDIR  := mkdir -p
+MKPKG  := tar jcf
+STRIP  := $(if $(filter Darwin,$(shell uname -s)),strip -u -r,strip)
+H      := $(if $(filter 1,$V),,@)
 
 CLEAR_VARS           := build/clear_vars.mk
 BUILD_STATIC_LIBRARY := build/static_lib.mk
@@ -88,6 +90,7 @@ endef
 define gen-objs-from-src
 $(eval LOCAL_TMP_VAR:= $(1:.c=.o)) \
 $(eval LOCAL_TMP_VAR := $(LOCAL_TMP_VAR:.cpp=.o)) \
+$(eval LOCAL_TMP_VAR := $(LOCAL_TMP_VAR:.proto=.pb.o)) \
 $(addprefix $(DIR_OUT)/objs/$(LOCAL_PATH)/,$(LOCAL_TMP_VAR))
 endef
 
@@ -190,6 +193,17 @@ define compile-cpp-to-d
 	$(H) $(MKDIR) $(dir $@)
 	$(H) $(CPP) -MM -MF $(subst .o,.d,$@) -MP -MT $@ $(GLOBAL_C_FLAGS) $(LOCAL_C_FLAGS) $<
 endef
+
+##########################################
+## compile *.proto to *.cpp
+##########################################
+define compile-proto-to-cpp
+	$(MKDIR) $(dir $@)
+	cd $(dir $@) && \
+	$(PROTOC) --cpp_out=. $(shell basename $<)
+	$(MV) $(basename $@).cc $@
+endef
+
 
 ##########################################
 ## ar all *.o to .a
